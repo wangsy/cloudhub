@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Cloud Storages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Access token</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cloud_storages.each do |cloud_storage| %>
+      <tr>
+        <td><%= cloud_storage.name %></td>
+        <td><%= cloud_storage.access_token %></td>
+        <td><%= link_to 'Show', cloud_storage %></td>
+        <td><%= link_to 'Edit', edit_cloud_storage_path(cloud_storage) %></td>
+        <td><%= link_to 'Destroy', cloud_storage, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cloud Storage', new_cloud_storage_path %>

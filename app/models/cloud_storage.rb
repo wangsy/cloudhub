@@ -1,0 +1,2 @@
+class CloudStorage < ApplicationRecord
+end

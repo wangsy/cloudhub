@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @cloud_storage.name %>
+</p>
+
+<p>
+  <strong>Access token:</strong>
+  <%= @cloud_storage.access_token %>
+</p>
+
+<%= link_to 'Edit', edit_cloud_storage_path(@cloud_storage) %> |
+<%= link_to 'Back', cloud_storages_path %>
