@@ -1,0 +1,72 @@
+<%= form_with(model: cloud_resource, local: true) do |form| %>
+  <% if cloud_resource.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cloud_resource.errors.count, "error") %> prohibited this cloud_resource from being saved:</h2>
+
+      <ul>
+      <% cloud_resource.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :cloud_resource_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :path_lower %>
+    <%= form.text_field :path_lower, id: :cloud_resource_path_lower %>
+  </div>
+
+  <div class="field">
+    <%= form.label :path_display %>
+    <%= form.text_field :path_display, id: :cloud_resource_path_display %>
+  </div>
+
+  <div class="field">
+    <%= form.label :resource_id %>
+    <%= form.text_field :resource_id, id: :cloud_resource_resource_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :client_modified %>
+    <%= form.datetime_select :client_modified, id: :cloud_resource_client_modified %>
+  </div>
+
+  <div class="field">
+    <%= form.label :server_modified %>
+    <%= form.datetime_select :server_modified, id: :cloud_resource_server_modified %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rev %>
+    <%= form.text_field :rev, id: :cloud_resource_rev %>
+  </div>
+
+  <div class="field">
+    <%= form.label :size %>
+    <%= form.number_field :size, id: :cloud_resource_size %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content_hash %>
+    <%= form.text_field :content_hash, id: :cloud_resource_content_hash %>
+  </div>
+
+  <div class="field">
+    <%= form.label :parent_id %>
+    <%= form.number_field :parent_id, id: :cloud_resource_parent_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :resource_type %>
+    <%= form.text_field :resource_type, id: :cloud_resource_resource_type %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

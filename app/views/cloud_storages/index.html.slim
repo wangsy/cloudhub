@@ -1,0 +1,20 @@
+p#notice= notice
+h1 Cloud Storages
+table.table
+  thead
+    tr
+      th Name
+      th Access token
+      th colspan="3" 
+  tbody
+    - @cloud_storages.each do |cloud_storage|
+      tr
+        td= cloud_storage.name
+        td= cloud_storage.access_token
+        td= link_to 'Show', cloud_storage
+        td= link_to 'Edit', edit_cloud_storage_path(cloud_storage)
+        td= link_to 'Destroy', cloud_storage, method: :delete, data: {confirm: 'Are you sure?'}
+br
+= link_to 'New Cloud Storage', new_cloud_storage_path
+br
+= link_to 'Cloud Resources', cloud_resources_path

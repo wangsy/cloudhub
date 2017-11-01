@@ -1,0 +1,36 @@
+p#notice= notice
+h1 Cloud Resources
+
+nav
+  ol.breadcrumb
+    - @cloud_resource.parents.each do |parent|
+      li.breadcrumb-item
+        = parent.name
+    li.breadcrumb-item
+      = @cloud_resource.name
+table.table
+  thead
+    tr
+      th Name
+      th Size
+      th Client modified
+      th Server modified
+  tbody
+    - @cloud_resources.each do |cloud_resource|
+      tr
+        - if cloud_resource.resource_type == "folder"
+          td
+            i.fa.fa-folder.text-secondary aria-hidden="true"
+            | &nbsp;
+            = link_to cloud_resource.name, cloud_resources_path(id: cloud_resource)
+        - else
+          td
+            i.fa.fa-file.text-secondary aria-hidden="true"
+            | &nbsp;
+            = link_to cloud_resource.name, cloud_resource_path(cloud_resource)
+        td= number_to_human_size cloud_resource.size
+        td= time_ago_in_words cloud_resource.client_modified if cloud_resource.client_modified.present?
+        td= time_ago_in_words cloud_resource.server_modified if cloud_resource.server_modified.present?
+br/
+= link_to 'New Cloud Resource', new_cloud_resource_path
+ 

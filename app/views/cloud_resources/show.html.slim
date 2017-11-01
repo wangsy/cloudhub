@@ -1,0 +1,38 @@
+p#notice= notice
+p
+  strong Name:
+  = @cloud_resource.name
+p
+  strong Path lower:
+  = @cloud_resource.path_lower
+p
+  strong Path display:
+  = @cloud_resource.path_display
+p
+  strong Resource:
+  = @cloud_resource.resource_id
+p
+  strong Client modified:
+  = @cloud_resource.client_modified
+p
+  strong Server modified:
+  = @cloud_resource.server_modified
+p
+  strong Rev:
+  = @cloud_resource.rev
+p
+  strong Size:
+  = @cloud_resource.size
+p
+  strong Content hash:
+  = @cloud_resource.content_hash
+p
+  strong Parent:
+  = @cloud_resource.parent_id
+p
+  strong Resource type:
+  = @cloud_resource.resource_type
+= link_to 'Edit', edit_cloud_resource_path(@cloud_resource), class: "btn btn-light"
+| \
+= link_to 'Back', cloud_resources_path
+ 

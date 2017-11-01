@@ -1,5 +1,5 @@
 class CloudStoragesController < ApplicationController
-  before_action :set_cloud_storage, only: [:show, :edit, :update, :destroy]
+  before_action :set_cloud_storage, only: [:show, :edit, :update, :destroy, :list_folder_continue]
 
   # GET /cloud_storages
   # GET /cloud_storages.json
@@ -59,6 +59,10 @@ class CloudStoragesController < ApplicationController
       format.html { redirect_to cloud_storages_url, notice: 'Cloud storage was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def list_folder_continue
+    CloudStorageListContinueJob.perform_later @cloud_storage
   end
 
   private

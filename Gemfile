@@ -32,6 +32,11 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'dropbox_api'
+gem 'bootstrap'
+gem 'jquery-rails'
+gem "slim-rails"
+gem "font-awesome-rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
