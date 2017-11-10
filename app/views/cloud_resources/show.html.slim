@@ -1,38 +1,37 @@
 p#notice= notice
-p
-  strong Name:
-  = @cloud_resource.name
-p
-  strong Path lower:
-  = @cloud_resource.path_lower
-p
-  strong Path display:
-  = @cloud_resource.path_display
-p
-  strong Resource:
-  = @cloud_resource.resource_id
-p
-  strong Client modified:
-  = @cloud_resource.client_modified
-p
-  strong Server modified:
-  = @cloud_resource.server_modified
-p
-  strong Rev:
-  = @cloud_resource.rev
-p
-  strong Size:
-  = @cloud_resource.size
-p
-  strong Content hash:
-  = @cloud_resource.content_hash
-p
-  strong Parent:
-  = @cloud_resource.parent_id
-p
-  strong Resource type:
-  = @cloud_resource.resource_type
+
+h2= @cloud_resource.name
+
+.row
+  .col-sm-3
+    strong Resource ID:
+  .col-sm-9
+    = @cloud_resource.resource_id
+
+.row
+  .col-sm-3
+    strong Client modified:
+  .col-sm-9
+    = @cloud_resource.client_modified
+
+.row
+  .col-sm-3
+    strong Server modified:
+  .col-sm-9
+    = @cloud_resource.server_modified
+
+.row
+  .col-sm-3
+    strong Rev:
+  .col-sm-9
+    = @cloud_resource.rev
+
+.row
+  .col-sm-3
+    strong Size:
+  .col-sm-9
+    = number_to_human_size @cloud_resource.size
+
 = link_to 'Edit', edit_cloud_resource_path(@cloud_resource), class: "btn btn-light"
-| \
-= link_to 'Back', cloud_resources_path
+= link_to 'Back', cloud_resources_path, class: "btn btn-light"
  

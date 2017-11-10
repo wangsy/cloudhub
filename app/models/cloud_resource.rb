@@ -65,8 +65,8 @@ class CloudResource < ApplicationRecord
     CloudResource.where(parent_id: nil).first
   end
 
-  def children
-    CloudResource.where(parent_id: self.id)
+  def children(page)
+    CloudResource.where(parent_id: self.id).paginate(page: page, per_page: 100)
   end
 
   def parents

@@ -5,7 +5,7 @@ nav
   ol.breadcrumb
     - @cloud_resource.parents.each do |parent|
       li.breadcrumb-item
-        = parent.name
+        = link_to (parent.name.present? ? parent.name : "Home"), cloud_resources_path(id:parent)
     li.breadcrumb-item
       = @cloud_resource.name
 table.table
@@ -30,7 +30,10 @@ table.table
             = link_to cloud_resource.name, cloud_resource_path(cloud_resource)
         td= number_to_human_size cloud_resource.size
         td= time_ago_in_words cloud_resource.client_modified if cloud_resource.client_modified.present?
-        td= time_ago_in_words cloud_resource.server_modified if cloud_resource.server_modified.present?
-br/
-= link_to 'New Cloud Resource', new_cloud_resource_path
- 
+        td= time_ago_in_words cloud_resource.server_modified if cloud_resource.server_modified.present? 
+
+.row
+  .col.col-lg-2
+  .col-md-auto
+    = will_paginate @cloud_resources, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer
+  .col.col-lg-2

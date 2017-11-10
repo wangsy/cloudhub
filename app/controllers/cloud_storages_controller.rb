@@ -10,6 +10,9 @@ class CloudStoragesController < ApplicationController
   # GET /cloud_storages/1
   # GET /cloud_storages/1.json
   def show
+    client = DropboxApi::Client.new(@cloud_storage.access_token)
+    @account = client.get_current_account
+    @usage = client.get_space_usage
   end
 
   # GET /cloud_storages/new
