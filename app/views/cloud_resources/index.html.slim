@@ -11,6 +11,7 @@ nav
 table.table
   thead
     tr
+      th 
       th Name
       th Size
       th Client modified
@@ -18,6 +19,9 @@ table.table
   tbody
     - @cloud_resources.each do |cloud_resource|
       tr
+        td
+          - if cloud_resource.thumbnail_path.present?
+            = image_tag cloud_resource.thumbnail_path, style: "max-width: 64px; max-height: 64px"
         - if cloud_resource.resource_type == "folder"
           td
             i.fa.fa-folder.text-secondary aria-hidden="true"

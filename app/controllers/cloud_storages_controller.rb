@@ -13,6 +13,9 @@ class CloudStoragesController < ApplicationController
     client = DropboxApi::Client.new(@cloud_storage.access_token)
     @account = client.get_current_account
     @usage = client.get_space_usage
+    @total_count = CloudResource.count
+    @oneday_count = CloudResource.where("created_at > ?", 1.day.ago).count
+    @oneweek_count = CloudResource.where("created_at > ?", 1.week.ago).count
   end
 
   # GET /cloud_storages/new

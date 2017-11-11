@@ -9,6 +9,7 @@ class CloudStorageListContinueJob < ApplicationJob
       cloud_storage.update(last_cursor: result.cursor)
       result.entries.each do |entry|
         CloudResource.from_entry entry
+        ActionCable.server.broadcast("some_channel", body: entry.name)
       end
     end
   end

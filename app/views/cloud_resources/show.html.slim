@@ -2,6 +2,9 @@ p#notice= notice
 
 h2= @cloud_resource.name
 
+- if @cloud_resource.thumbnail_path.present?
+  .text-center
+    = image_tag @cloud_resource.thumbnail_path, clsss: "rounded mx-auto d-block", style: "max-width: 1024px; max-height: 768px"
 .row
   .col-sm-3
     strong Resource ID:

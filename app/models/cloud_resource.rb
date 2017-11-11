@@ -79,4 +79,35 @@ class CloudResource < ApplicationRecord
     end
     parents
   end
+
+  def image?
+    ext = name.downcase
+    return true if ext.end_with? "jpeg" or ext.end_with? "jpg" or
+      ext.end_with? "tiff" or ext.end_with? "tif" or
+      ext.end_with? "bmp" or ext.end_with? "png"
+    false
+  end
+
+  def thumbnail_path
+    return nil unless image?
+    path = "#{Rails.root}/public/cloud_resources/#{id}/thumbnail.jpg"
+    return "/cloud_resources/#{id}/thumbnail.jpg" if File.exist? path
+    CloudResourceDownloadThumbnailJob.perform_later self
+    nil
+  end
+
+  def download_thumbnail
+    if image?
+      dropbox = CloudStorage.first
+      client = DropboxApi::Client.new(dropbox.access_token)
+      dir = "#{Rails.root}/public/cloud_resources/#{id}/"
+      FileUtils.mkdir_p(dir) unless File.directory?(dir)
+      file = File.open("#{Rails.root}/public/cloud_resources/#{id}/thumbnail.jpg", "wb")
+
+      client.get_thumbnail(resource_id, :format => :jpeg, size: "w1024h768") do |thumbnail_content|
+        file.write thumbnail_content
+      end
+      file.close
+    end
+  end
 end

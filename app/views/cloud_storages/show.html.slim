@@ -5,11 +5,30 @@ h1= @cloud_storage.name
   .col-sm-auto
     = image_tag @account.profile_photo_url, class: "rounded-circle img-thumbnail"
   .col-sm
-    p.text-left
-      strong= @account.name.display_name
-      |  (
-      = @account.email
-      ' )
+    strong= @account.name.display_name
+    |  (
+    = @account.email
+    ' )
+    .row
+      .col-sm-3
+        strong Total Count
+      .col-sm-9
+        .text-right
+          = number_with_delimiter @total_count
+    .row
+      .col-sm-auto
+        strong Updated count since last week
+      .col-sm
+        .text-right
+          = number_with_delimiter @oneweek_count
+    .row
+      .col-sm-auto
+        strong Updated count since yester day
+      .col-sm
+        .text-right
+          = number_with_delimiter @oneday_count
+    p
+    p
     p.text-right
       = number_to_human_size @usage.used
       ' /
@@ -17,6 +36,7 @@ h1= @cloud_storage.name
     .progress
       .progress-bar.bg-info role="progressbar" style="width: 50%"
 p
+p data-chat-room='Best Room'
 .btn-toolbar
   .btn-group.mr-2
     = link_to 'Edit', edit_cloud_storage_path(@cloud_storage), class: "btn btn-secondary"
