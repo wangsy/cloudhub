@@ -97,6 +97,10 @@ class CloudResource < ApplicationRecord
     nil
   end
 
+  def thumbnail_path_later
+    return "/cloud_resources/#{id}/thumbnail.jpg"
+  end
+
   def download_thumbnail
     if image?
       dropbox = CloudStorage.first
@@ -109,6 +113,7 @@ class CloudResource < ApplicationRecord
         file.write thumbnail_content
       end
       file.close
+      ActionCable.server.broadcast("some_channel", body: "downloaded_thumbnail", resource_id: "/cloud_resources/#{id}/thumbnail.jpg")
     end
   end
 end

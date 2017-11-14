@@ -8,10 +8,11 @@ nav
         = link_to (parent.name.present? ? parent.name : "Home"), cloud_resources_path(id:parent)
     li.breadcrumb-item
       = @cloud_resource.name
+div data-chat-room="Best Room"
 table.table
   thead
     tr
-      th 
+      th
       th Name
       th Size
       th Client modified
@@ -22,6 +23,8 @@ table.table
         td
           - if cloud_resource.thumbnail_path.present?
             = image_tag cloud_resource.thumbnail_path, style: "max-width: 64px; max-height: 64px"
+          - else
+            img *{'style'=>'max-width: 64px; max-height: 64px', 'data-src'=>cloud_resource.thumbnail_path_later}
         - if cloud_resource.resource_type == "folder"
           td
             i.fa.fa-folder.text-secondary aria-hidden="true"
@@ -34,7 +37,7 @@ table.table
             = link_to cloud_resource.name, cloud_resource_path(cloud_resource)
         td= number_to_human_size cloud_resource.size
         td= time_ago_in_words cloud_resource.client_modified if cloud_resource.client_modified.present?
-        td= time_ago_in_words cloud_resource.server_modified if cloud_resource.server_modified.present? 
+        td= time_ago_in_words cloud_resource.server_modified if cloud_resource.server_modified.present?
 
 .row
   .col.col-lg-2
