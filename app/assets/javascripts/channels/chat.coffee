@@ -1,15 +1,13 @@
 App.chat = App.cable.subscriptions.create {channel: "ChatChannel", room: "some_channel"},
   connected: ->
     # Called when the subscription is ready for use on the server
-    @appendLine({body: "connected"})
-
+    $("[data-chat-room='Best Room']").append("connected<br />")
 
   disconnected: ->
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
-    @appendLine({body: "received"})
     @appendLine(data)
 
   appendLine: (data) ->
@@ -18,7 +16,5 @@ App.chat = App.cable.subscriptions.create {channel: "ChatChannel", room: "some_c
 
   createLine: (data) ->
     """
-    <p>
-      <span>#{data["body"]}</span>
-    </p>
+    <span>Added <a href="/cloud_resources/#{data["resource_id"]}">#{data["body"]}</a></span><br />
     """

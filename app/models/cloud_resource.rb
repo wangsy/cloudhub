@@ -37,7 +37,7 @@ class CloudResource < ApplicationRecord
       end
     else
       if entry.class == DropboxApi::Metadata::Folder
-        CloudResource.create!(
+        cResource = CloudResource.create!(
           name:entry.name,
           path_lower:entry.path_lower,
           path_display:entry.path_display,
@@ -45,7 +45,7 @@ class CloudResource < ApplicationRecord
           parent_id: parent.id,
           resource_type: "folder")
       elsif entry.class == DropboxApi::Metadata::File
-        CloudResource.create!(
+        cResource = CloudResource.create!(
           name:entry.name,
           path_lower:entry.path_lower,
           path_display:entry.path_display,
@@ -59,6 +59,7 @@ class CloudResource < ApplicationRecord
           resource_type: "file")
       end
     end
+    cResource
   end
 
   def self.find_root

@@ -8,7 +8,7 @@ class CloudResourcesController < ApplicationController
     root = CloudResource.find_root
     root = params[:id] || root.id
     @cloud_resource = CloudResource.find root.to_i
-    @cloud_resources = @cloud_resource.children(params[:page] || 1)
+    @cloud_resources = @cloud_resource.children(params[:page] || 1).order("name DESC")
   end
 
   # GET /cloud_resources/1

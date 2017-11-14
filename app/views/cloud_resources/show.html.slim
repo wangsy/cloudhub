@@ -2,6 +2,14 @@ p#notice= notice
 
 h2= @cloud_resource.name
 
+nav
+  ol.breadcrumb
+    - @cloud_resource.parents.each do |parent|
+      li.breadcrumb-item
+        = link_to (parent.name.present? ? parent.name : "Home"), cloud_resources_path(id:parent)
+    li.breadcrumb-item
+      = @cloud_resource.name
+      
 - if @cloud_resource.thumbnail_path.present?
   .text-center
     = image_tag @cloud_resource.thumbnail_path, clsss: "rounded mx-auto d-block", style: "max-width: 1024px; max-height: 768px"
@@ -15,13 +23,13 @@ h2= @cloud_resource.name
   .col-sm-3
     strong Client modified:
   .col-sm-9
-    = @cloud_resource.client_modified
+    = @cloud_resource.client_modified.to_formatted_s(:long)
 
 .row
   .col-sm-3
     strong Server modified:
   .col-sm-9
-    = @cloud_resource.server_modified
+    = @cloud_resource.server_modified.to_formatted_s(:long)
 
 .row
   .col-sm-3

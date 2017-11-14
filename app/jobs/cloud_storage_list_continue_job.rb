@@ -8,8 +8,8 @@ class CloudStorageListContinueJob < ApplicationJob
       result = client.list_folder_continue(cloud_storage.last_cursor)
       cloud_storage.update(last_cursor: result.cursor)
       result.entries.each do |entry|
-        CloudResource.from_entry entry
-        ActionCable.server.broadcast("some_channel", body: entry.name)
+        resource = CloudResource.from_entry entry
+        ActionCable.server.broadcast("some_channel", body: resource.path_display, resource_id: resource.id)
       end
     end
   end
